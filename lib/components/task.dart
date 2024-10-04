@@ -15,6 +15,13 @@ class Task extends StatefulWidget {
 class _TaskState extends State<Task> {
   int nivel = 0;
 
+  bool assetOrNetwork() {
+    if (widget.foto.contains("http")) {
+      return false;
+    }
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -46,10 +53,15 @@ class _TaskState extends State<Task> {
                       height: 100,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(4),
-                        child: Image.asset(
-                          widget.foto,
-                          fit: BoxFit.cover,
-                        ),
+                        child: assetOrNetwork()
+                            ? Image.asset(
+                                widget.foto,
+                                fit: BoxFit.cover,
+                              )
+                            : Image.network(
+                                widget.foto,
+                                fit: BoxFit.cover,
+                              ),
                       ),
                     ),
                     Column(
@@ -63,7 +75,9 @@ class _TaskState extends State<Task> {
                               style: const TextStyle(fontSize: 24),
                               overflow: TextOverflow.ellipsis,
                             )),
-                        Difficulty(difficultyLevel: widget.dificuldade,),
+                        Difficulty(
+                          difficultyLevel: widget.dificuldade,
+                        ),
                       ],
                     ),
                     SizedBox(
@@ -79,8 +93,10 @@ class _TaskState extends State<Task> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Icon(Icons.arrow_drop_up, size: 24), // Ajuste o tamanho do ícone
-                            Text("UP", style: TextStyle(fontSize: 10)), // Reduza um pouco o tamanho do texto
+                            Icon(Icons.arrow_drop_up, size: 24),
+                            // Ajuste o tamanho do ícone
+                            Text("UP", style: TextStyle(fontSize: 10)),
+                            // Reduza um pouco o tamanho do texto
                           ],
                         ),
                       ),
