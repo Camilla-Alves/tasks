@@ -20,6 +20,7 @@ class _FormScreenState extends State<FormScreen> {
       key: _formKey,
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.blue,
           title: const Text("Nova Tarefa"),
         ),
         body: Center(
@@ -131,6 +132,7 @@ class _FormScreenState extends State<FormScreen> {
                             content: Text("Salvando nova Tarefa"),
                           ),
                         );
+                        Navigator.pop(context);
                       }
                     },
                     child: Text("Adicionar!"),
